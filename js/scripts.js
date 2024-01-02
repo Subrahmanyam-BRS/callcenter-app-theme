@@ -24,3 +24,46 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+   document.addEventListener('DOMContentLoaded',function(){
+    var loginForm = document.getElementById('login');
+    loginForm.addEventListener('click',function(event){
+        // validation for Email
+        var email = document.getElementById('inputEmail').value;
+        if (email.trim() === '' || !isValidEmail(email) ) {
+          alert('Please enter a valid emailadress.');
+          event.preventDefault();
+          return false;
+        }
+        // validation for password
+        var password = document.getElementById('inputPassword').value;
+        if (password.trim() === '') {
+            alert('Please enter a password.');
+            event.preventDefault();
+            return false;
+        }
+    });
+    function isValidEmail(email){
+        // Simple email validation regex
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+   });
+   document.getElementById('yourFormId').addEventListener('submit', function(event) {
+    var password = document.getElementById('inputPassword').value;
+    // Check if the password is empty
+    if (password.trim() === '') {
+        alert('Please enter a password.');
+        event.preventDefault();
+        return false;
+    }
+    // Check if the password contains at least one special character
+    var specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (!specialCharacterRegex.test(password)) {
+        alert('Password must contain at least one special character.');
+        event.preventDefault();
+        return false;
+    }
+    // Additional password strength checks can be added here
+    // If all checks pass, the form will be submitted
+});
